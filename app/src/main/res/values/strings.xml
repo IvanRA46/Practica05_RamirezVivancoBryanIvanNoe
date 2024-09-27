@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">codigo</string>
+
+    <string name='titulo'>Gestion de camara</string>
+    <string name='menu1'>Lector Barras/QR</string>
+    <string name='menu2'>Tomar foto</string>
+
+    <!-- Activity lectpr -->
+    <string name='titulo1'>Lector de barras y QR</string>
+    <string name='escaner'>Escaner</string>
+    <string name='res'>Codigo leido</string>
+</resources>
