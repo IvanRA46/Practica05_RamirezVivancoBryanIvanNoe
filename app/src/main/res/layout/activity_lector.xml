@@ -11,54 +11,42 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Lector de Códigos"
+        app:title="QR"
         app:titleTextColor="@android:color/white" />
 
     <TextView
         android:id="@+id/txtTitulo1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Lector de Barra y QR"
-        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <Button
-        android:id="@+id/btnescanear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Escanear"
+    <EditText
+        android:id="@+id/edtCodigo"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="Código leído"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitulo1" />
 
     <EditText
-        android:id="@+id/edtCodigo"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Codigo leido"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnescanear" />
-
-    <EditText
         android:id="@+id/edtDescripcion"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Captura descripcion"
+        android:hint="Captura descripción"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,10 +54,9 @@
 
     <EditText
         android:id="@+id/edtInfoAdicional1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
-        android:ems="10"
         android:hint="Info Adicional 1"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,10 +65,9 @@
 
     <EditText
         android:id="@+id/edtInfoAdicional2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
-        android:ems="10"
         android:hint="Info Adicional 2"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,35 +76,62 @@
 
     <Button
         android:id="@+id/btnRegistrar"
-        android:layout_width="wrap_content"
+        android:layout_width="199dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/black"
+        android:padding="12dp"
         android:text="Capturar"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtInfoAdicional2" />
 
     <Button
         android:id="@+id/btnBuscar"
-        android:layout_width="wrap_content"
+        android:layout_width="199dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/black"
+        android:padding="12dp"
         android:text="Buscar"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:icon="@drawable/baseline_image_search_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegistrar" />
 
     <Button
         android:id="@+id/btnLimpiar"
-        android:layout_width="wrap_content"
+        android:layout_width="199dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/black"
+        android:padding="12dp"
         android:text="Limpiar"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBuscar" />
 
+    <Button
+        android:id="@+id/btnescanear"
+        android:layout_width="199dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/black"
+        android:padding="12dp"
+        android:text="Escanear"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:icon="@drawable/baseline_center_focus_weak_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLimpiar" /> <!-- Colocado al final -->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 

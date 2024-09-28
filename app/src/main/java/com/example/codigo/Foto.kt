@@ -50,7 +50,6 @@ class Foto : AppCompatActivity() {
         btnGuardarFoto.setOnClickListener { guardarFoto() }
         btnLimpiarFoto.setOnClickListener { limpiarFoto() }
 
-
         toolbar.setNavigationOnClickListener {
             finish()
         }
@@ -64,22 +63,37 @@ class Foto : AppCompatActivity() {
     }
 
     private fun checkPermissions() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
+        val storagePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        if (storagePermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                STORAGE_PERMISSION_CODE)
+        } else {
+            // El permiso ya ha sido concedido
+            Toast.makeText(this, "Permiso de almacenamiento ya concedido", Toast.LENGTH_SHORT).show()
         }
     }
 
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults) // Llamada al super
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == STORAGE_PERMISSION_CODE) {
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                Toast.makeText(this, "Permiso de almacenamiento concedido", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Permiso de almacenamiento denegado", Toast.LENGTH_SHORT).show()
+            if (grantResults.isNotEmpty()) {
+                for (i in permissions.indices) {
+                    val permission = permissions[i]
+                    val result = grantResults[i]
+                    if (result == PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(this, "Permiso concedido para $permission", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Permiso denegado para $permission", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }
+
 
     private fun tomarFoto() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -98,16 +112,21 @@ class Foto : AppCompatActivity() {
         }
 
     private fun guardarFoto() {
-        fotoBitmap?.let { bitmap ->
-            val archivo = File(getExternalFilesDir(null), "foto_${System.currentTimeMillis()}.jpg")
-            try {
-                FileOutputStream(archivo).use { out ->
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
-                    Toast.makeText(this, "Foto guardada: ${archivo.absolutePath}", Toast.LENGTH_LONG).show()
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            fotoBitmap?.let { bitmap ->
+                val archivo = File(getExternalFilesDir(null), "foto_${System.currentTimeMillis()}.jpg")
+                try {
+                    FileOutputStream(archivo).use { out ->
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+                        Toast.makeText(this, "Foto guardada: ${archivo.absolutePath}", Toast.LENGTH_LONG).show()
+                    }
+                } catch (e: IOException) {
+                    Toast.makeText(this, "Error al guardar la foto", Toast.LENGTH_SHORT).show()
                 }
-            } catch (e: IOException) {
-                Toast.makeText(this, "Error al guardar la foto", Toast.LENGTH_SHORT).show()
-            }
-        } ?: Toast.makeText(this, "No hay foto para guardar", Toast.LENGTH_SHORT).show()
+            } ?: Toast.makeText(this, "No hay foto para guardar", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Permiso de almacenamiento no concedido", Toast.LENGTH_SHORT).show()
+        }
     }
 }
+

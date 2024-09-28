@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">codigo</string>
 
-    <string name='titulo'>Gestion de camara</string>
+    <string name='titulo'>Gestión de cámara</string>
     <string name='menu1'>Lector Barras/QR</string>
     <string name='menu2'>Tomar foto</string>
 
